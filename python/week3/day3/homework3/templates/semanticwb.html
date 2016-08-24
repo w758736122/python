@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A AWESOME WEB !</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/semantic.js' %}"></script>
+    </head>
+  <body>
+      <div class="ui  sidebar inverted vertical menu">#inverted 反色 vertical垂直  #menu 找id为menu的 $找class
+        <a class="item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+      </div>
+      <div class="pusher">
+        <div class="ui menu" >
+          <div class="header item" id="menu">
+            Our Company
+            <i class="content icon"></i>
+          </div>
+          <a class="item">About Us </a>
+          <a class="item">Jobs </a>
+          <a class="item">Locations </a>
+        </div>
+           <div class="ui link cards">
+  {% for item in arti %}
+            <div class="card">
+                <div class="image">
+                <img src="{% static 'images/1.jpg' %}">
+                </div>
+            <div class="content">
+                <div class="header">{{ item.title }}</div>
+                <div class="meta">
+                    <a href="{{ item.url }}" target="_blank">网址是：{{ item.url }}</a>
+                </div>
+            <div class="description">价格是：{{ item.price }} 元</div>
+            </div>
+            <div class="extra content">
+                <span class="right floated">{{ item.time }} </span>
+                <span><i class="user icon"></i> {{ item.type }} </span>
+            </div>
+            </div>
+ {% endfor %}
+           </div>
+
+           <div class="ui pagination menu">
+               {% if arti.has_previous %}
+                   <a class="active item" href="?page={{ arti.previous_page_number }}"> < </a>
+               {% endif %}
+            <div class="disabled item">
+              page {{ arti.number }}of {{ arti.paginator.num_pages }}
+            </div>
+           {% if arti.has_next %}
+            <a class="item" href="?page={{ arti.next_page_number }}"> ></a>
+           {% endif %}
+          </div>
+
+   </div>
+  <script>
+    $('#menu').click(function () {
+      $('.ui.sidebar.inverted.vertical.menu').sidebar('toggle');
+    });
+  </script>
+
+  </body>
+</html>
